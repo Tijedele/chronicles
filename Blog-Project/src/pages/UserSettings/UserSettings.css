@@ -1,0 +1,74 @@
+.UserSettings{
+    display: flex;
+    /* background-color: black; */
+}
+
+.UserSettingsWrapper{
+    flex: 9;
+    /* display: flex; */
+    padding: 20px;
+    /* background-color: red; */
+}
+
+.UserSettingsTitle{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.settingsUpdateTitle{
+    font-size: 30px;
+    margin-bottom: 20px;
+    color: lightcoral;
+}
+
+.settingsDeleteTitle{
+    color: red;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.UserSettingsForm{
+    display: flex;
+    align-items: start;
+    flex-direction: column;
+    background-color: white;
+}
+
+.UserSettingsPP{
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.UserSettingsPP > img{
+    width: 70px;
+    height: 70px;
+    border-radius: 20px;
+}
+
+.UserSettingsForm > label{
+    font-size: 20px;
+    margin-top: 20px;
+}
+
+.UserSettingsForm > input{
+   color: gray;
+   margin: 10px 0;
+   height: 30px;
+   border: none;
+   border-bottom: 1px solid lightgray;
+   width: 100%;
+}
+
+.UserSettingsForm > button{
+    width: 150px;
+    align-self: center;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: teal;
+    padding: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+}

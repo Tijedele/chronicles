@@ -1,0 +1,112 @@
+/* Container for the toolbar */
+.control-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  width: 100%;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  background: #f9f9f9;
+  border-radius: 8px 8px 0 0;
+}
+
+/* Button group inside toolbar */
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Editor toolbar buttons */
+.button-group button {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: all 0.2s ease-in-out;
+}
+
+.button-group button:hover {
+  background: #ececec;
+}
+
+/* Active button styling */
+.button-group .is-active {
+  background:  rgba(116, 95, 4, 0.486);
+  color: white;
+  border-color:  rgba(116, 95, 4, 0.486);
+}
+
+/* Disabled button styling */
+.button-group button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Editor container */
+.tiptap-editor {
+  min-height: 250px;
+  padding: 15px;
+  font-size: 16px;
+  line-height: 1.6;
+  border-radius: 0 0 8px 8px;
+  outline: none;
+  border: 1px solid #ddd;
+}
+
+/* Formatting Styles */
+.tiptap-editor h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.tiptap-editor h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.tiptap-editor blockquote {
+  border-left: 4px solid  rgba(116, 95, 4, 0.486);
+  padding-left: 10px;
+  color: #555;
+  font-style: italic;
+}
+
+/* Placeholder for Empty Editor */
+.textarea p.is-empty::before {
+  content: "Start writing...";
+  color: #aaa;
+  font-style: italic;
+  pointer-events: none;
+}
+
+.container{
+  /* min-height: 250px;
+  padding: 15px;
+  font-size: 16px;
+  line-height: 1.6;
+  border-radius: 0 0 8px 8px;
+  outline: none;
+  border: 1px solid #ddd; */
+  border: 10px solid #ddd;
+    border-radius: 8px;
+    padding-block: 12px;
+    padding-inline: 24px;
+    /* max-width: 965px; */
+    width: 70vw;
+    min-height: 100px;
+    margin: 208px;
+    background: rgb(243, 243, 243);
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.container .ProseMirror {
+  outline: none !important;
+  border: none !important;
+}
