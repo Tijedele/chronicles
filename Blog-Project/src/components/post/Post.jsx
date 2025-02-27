@@ -73,6 +73,7 @@ const Post = () => {
   const headers = {
     authorization: "Bearer " + token,
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

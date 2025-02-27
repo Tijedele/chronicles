@@ -6,7 +6,7 @@ import ListItem from '@tiptap/extension-list-item'
 import TextStyle from '@tiptap/extension-text-style'
 import { EditorProvider, useCurrentEditor } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 export const MenuBar = () => {
   const { editor } = useCurrentEditor()
@@ -219,25 +219,83 @@ export const extensions = [
   }),
 ]
 
-export const content = 
-  `
-<h2>
-  Please enter blog content here...
-</h2>
-`
-// [
-// //  <div className="textarea" style={{content: "Start writing...",
-// //   color: '#aaa',
-// //   fontStyle: 'italic',
-// //   pointerEvents: 'none',}}>
-// //   <p>Start writting</p>
-// //  </div>
-// ]
 
 
 
-export default ({setContent}) => {
-   return (
-    <EditorProvider  editorContainerProps={{className:"container" }}  onUpdate={({ editor }) =>setContent(editor.getHTML())} slotBefore={<MenuBar />} extensions={extensions} content={content}></EditorProvider>
-  )
+
+export default ({setContent, content}) => {
+const [hasUpdated, setHasUpdated] = useState(false)
+  const [editorContent, setEditorContent] = useState("");
+// console.log(content) 
+useEffect(() => {
+  if (content && !hasUpdated) {
+    setEditorContent(content);
+    setHasUpdated(true); // Prevent future updates
+  }
+
+  return () => {
+    setHasUpdated(true); // Cleanup: Ensures effect doesn't run again
+  };
+  // if (content !== undefined && content !== null) {
+  //   setEditorContent(content);
+  // }
+}, [content]);
+
+  return (
+    <EditorProvider
+      editorContainerProps={{ className: "container" }}
+      onUpdate={({ editor }) => setContent(editor.getHTML())}
+      slotBefore={<MenuBar />}
+      key={editorContent} 
+      extensions={extensions} 
+      content={editorContent ?? "<h2>Please enter blog content here...</h2>"}
+    />
+  );
+
+
+//   console.log(content)
+//    const contents = content ??
+//   `
+// <h2>
+//   Please enter blog content here...
+// </h2>
+// `
+// useEffect(() => {
+//   if (content) {
+//     setContent(content); // Update editor content when prop changes
+//   }
+// }, [content]);
+//    return (
+//     <EditorProvider  editorContainerProps={{className:"container" }}  onUpdate={({ editor }) =>setContent(editor.getHTML())} slotBefore={<MenuBar />} extensions={extensions} content={content}></EditorProvider>
+//   )
 }
+
+
+
+// import { useState, useEffect } from "react";
+
+// import {  useRef } from "react";
+
+// export default ({ setContent, content }) => {
+//   const editorRef = useRef(null); // Store editor instance
+
+//   useEffect(() => {
+//     if (editorRef.current && content) {
+//       editorRef.current.commands.setContent(content, false); // Update without losing focus
+//     }
+//   }, [content]); // Only update when content changes
+
+//   return (
+//     <EditorProvider
+//       editorContainerProps={{ className: "container" }}
+//       onUpdate={({ editor }) => {
+//         setContent(editor.getHTML());
+//         editorRef.current = editor; // Save editor instance
+//       }}
+//       slotBefore={<MenuBar />}
+//       extensions={extensions}
+//       content={content || "<h2>Please enter blog content here...</h2>"} // No state here!
+//     />
+//   );
+// };
+

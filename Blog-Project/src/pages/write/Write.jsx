@@ -14,11 +14,7 @@ const Write = () => {
   console.log(tkn);
   console.log(userDetails);
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   if (!tkn) {
-  //     navigate('/');
-  //   }
-  // }, [tkn, navigate]);
+ 
 
   const [posts, setPosts] = useState([]);
   const [image, setImage] = useState();
@@ -72,15 +68,17 @@ const Write = () => {
       try{
         const res = await axios.post(`${apiUrl}/uploads/image`, formData);
         console.log(res);
-        alert('Post Created Successfully');
+        // alert('Post Created Successfully');
+        toast.success('Post Created Successfully');
       } catch (e) {
         console.log(e);
         alert('Error Uploading Image');
         return;
       }
-
-      e.target.reset();
-      getAllPosts();
+      
+      // e.target.reset();
+      // getAllPosts();
+      navigate(`/single/${post_id}`)
     } catch (e) {
       console.log(e);
     };
@@ -141,29 +139,8 @@ const Write = () => {
         content={content}
         setContent={setContent}
       />
-      <button className="writeSubmit" onClick={()=>toast(handleSubmit, navigate('/single/:post_id'))}>Publish</button>
-        <form className="writeForm" style={{display:'none'}}>
-          <div className="writeFormGroup">
-            <label htmlFor="fileInput">
-              <i className="writeIcon fa-solid fa-plus"></i>
-            </label>
-            <input type="file" id="fileInput" style={{ display: "" }} />
-            <input
-              type="text"
-              className="writeInput"
-              placeholder="Title"
-              autoFocus={true}
-            />
-          </div>
-          <div className="writeFormGroup">
-            <textarea
-              className="writeInput writeText"
-              placeholder="Write your blog post here..."
-              type="text"
-            ></textarea>
-          </div>
-          <button className="">Publish</button>
-        </form>
+      <button className="writeSubmit" onClick={handleSubmit}>Publish</button>
+      
       </div>
     </>
   );

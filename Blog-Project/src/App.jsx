@@ -10,6 +10,9 @@ import Write from "./pages/write/Write";
 import UserSettings from "./pages/UserSettings/UserSettings";
 import SinglePost from "./pages/SinglePost/SinglePost";
 import Blogs from "./pages/blogs/Blogs";
+import UserProfile from "./pages/userprofile/UserProfile";
+import EditPost from "./pages/edit/EditPost";
+import Edit from "./pages/edit/Edit";
 
 export default function App() {
   return (
@@ -20,8 +23,11 @@ export default function App() {
       <Route path="/" element={<Signin />} />
       <Route path="/single/:post_id" element={<Single />} />
       <Route path="/createpost" element={<Write/>} />
+      {/* <Route path="/editpost/:post_id" element={<EditPost/>} /> */}
+      <Route path="/editpost/:post_id" element={<Edit/>} />
       <Route path="/blogs" element={<Blogs/>} />
       <Route path="/usersettings" element={<UserSettings/>} />
+      <Route path="/profile" element={<UserProfile/>} />
       {/* <Route path="/postdetails/:post_id" element={<SinglePost/>} /> */}
     </Routes>
   );

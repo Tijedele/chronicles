@@ -74,11 +74,24 @@ const UserSettings = () => {
           </div>
           <form onSubmit={handleSubmit} className="UserSettingsForm">
             <label>Profile Picture</label>
-            <div onClick={handleImageUpload} className="UserSettingsPP">
+            <div 
+            style={{
+                backgroundColor: "gray",
+                height: "70px",
+                width: "70px",
+                color: "white",
+                padding: "8px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                textAlign: "center",
+                borderRadius: "12px"
+              }}
+            onClick={handleImageUpload} className="UserSettingsPP">
               {imageUrl ? (
                 <img src={imageUrl} alt="" />
               ) : (
-                <p></p>
+                <i style={{width: '100px'}} className="UserSettingsPPIcon fa-regular fa-circle-user"></i>
               )}
               <input type="file" hidden ref={imageRef} onChange={imageUpload} />
               {/* <img src={imageUrl} alt="" /> */}

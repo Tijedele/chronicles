@@ -1,0 +1,54 @@
+.interactions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    position: relative;
+    /* left: 685px; */
+  }
+  
+  button {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .like-btn {
+    background-color: #f0f0f0;
+    color: #ff3b3b;
+  }
+  
+  .like-btn.active {
+    background-color: #ff3b3b;
+    color: white;
+  }
+  
+  .bookmark-btn {
+    background-color: #f0f0f0;
+    color: #007bff;
+  }
+  
+  .bookmark-btn.active {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .follow-btn {
+    background-color: #f0f0f0;
+    color: #28a745;
+  }
+  
+  .follow-btn.active {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  button:hover {
+    transform: scale(1.05);
+  }
+  

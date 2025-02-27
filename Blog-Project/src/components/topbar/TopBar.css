@@ -1,6 +1,6 @@
 .top {
   width: 100%;
-  /* height: 50px; */
+  height: 100px;
   background-color: white;
   position: sticky;
   top: 0;
@@ -48,7 +48,7 @@
   align-items: center;
   height: 36px;
   padding-inline: 8px;
-  background-color: rgba(128, 128, 0, 0.452); */
+  background-color: rgba(255, 255, 252, 0.459); */
 }
 
 .topcenter > input {

@@ -4,21 +4,45 @@ import flower from "../../assets/flower.png";
 import { Link, useNavigate } from "react-router";
 import { useUser } from "../../hooks/useUser";
 import MyDropdown from "../dropdown/Dropdown";
-
+import axios from "axios";
 
 const TopBar = () => {
-  const [showAvatar, setShowAvatar] = useState(false)
-  const navigate = useNavigate()
+  const [showAvatar, setShowAvatar] = useState(false);
+  const [showSearchResults, setShowSearchResults] = useState(false);
+  const [search_text, setSearchText] = useState("");
+  const [searchResults, setSearchResults] = useState();
+  const navigate = useNavigate();
 
   const { token: tkn, user: userDetails, logout } = useUser();
+  const apiUrl = import.meta.env.VITE_APIURL;
+
   console.log(tkn);
   const token = localStorage.getItem("token");
-  console.log(userDetails);
+  // console.log(userDetails);
   useEffect(() => {
     if (!token) {
       navigate("/");
     }
   }, []);
+  const searchPost = async (text) => {
+    try {
+      const res = await axios.get(`${apiUrl}/posts/search/${text}`);
+      console.log(res.data.data);
+      setSearchResults(res.data.data);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const handleSearch = (e) => {
+    e.preventDefault();
+    searchPost(search_text);
+  };
+
+  const resultRef = useRef(null);
+  useEffect(() => {
+    return () => {};
+  }, []);
+
   return (
     <div className="top">
       <link
@@ -29,37 +53,103 @@ const TopBar = () => {
         referrerPolicy="no-referrer"
       />
       <div className="topleft">
-        <h1 className="logo" onClick={() => navigate('../../home')} style={{cursor: 'pointer'}}>Chronicles</h1>
+        <h1
+          className="logo"
+          onClick={() => navigate("../../home")}
+          style={{ cursor: "pointer" }}
+        >
+          Chronicles
+        </h1>
         {/* <i className="topIcon fa-brands fa-square-instagram"></i>
             <i className="topIcon fa-brands fa-square-facebook"></i>
             <i className="topIcon fa-brands fa-square-pinterest"></i>
             <i className="topIcon fa-brands fa-square-x-twitter"></i> */}
       </div>
-      <div className="topcenter">
-        <input
-          type="search"
-          name=""
-          id=""
-          placeholder="What would you like to read"
-        />
-        <i className="topSearchIcon fa-solid fa-magnifying-glass"></i>
-        {/* <form className="search-form">
-          <input type="search" placeholder="What would you like to read" />
-         
-        </form> */}
-        {/* <ul className='topList'>
-                <li className='topListItem'>HOME</li>
-                <li className='topListItem'>ABOUT</li>
-                <li className='topListItem'>CONTACT</li>
-                <li className='topListItem'>WRITE</li>
-                <li className='topListItem'>LOGOUT</li>
-            </ul> */}
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          position: "relative",
+        }}
+      >
+        <form
+          onSubmit={handleSearch}
+          onClick={() => navigate(`/single/${post?.post_id}`)}
+          className="topcenter"
+          style={{ background: "none" }}
+        >
+          <input
+            type="search"
+            name=""
+            id=""
+            value={search_text}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+              searchPost(e.target.value);
+              if (e.target.value == "") {
+                setShowSearchResults(false);
+              }
+            }}
+            placeholder="What would you like to read"
+            onFocus={() => {
+              setShowSearchResults(true);
+            }}
+            // onBlur={() =>{ setShowSearchResults(false)
+            //   setSearchResults([])
+            // }}
+          />
+          <i
+            onClick={handleSearch}
+            className="topSearchIcon fa-solid fa-magnifying-glass"
+          ></i>
+        </form>
+        {/* Search Results */}
+        {showSearchResults && (
+          <div
+            ref={resultRef}
+            style={{
+              position: "absolute",
+              top: 64,
+              minHeight: "100px",
+              display: "flex",
+              flexDirection: "column",
+              gap: "24px",
+              paddingInline: "12px",
+              background: "rgba(255, 255, 252, 0.459)",
+              width: "100%",
+              fontSize: "24px",
+            }}
+          >
+            {searchResults &&
+              searchResults.map((post) => (
+                <div
+                  onClick={() => navigate(`/single/${post?.post_id}`)}
+                  key={post.post_id}
+                  style={{
+                    display: "flex",
+                    gap: "12px",
+                    alignItems: "center",
+                    overflowInline: "hidden",
+                    cursor: "pointer",
+                  }}
+                >
+                  <img src={`${apiUrl}/${post.image_url}`} width={24} />
+                  <p
+                    className=""
+                    style={{ lineClamp: "1", overflow: "hidden" }}
+                  >
+                    {post.post_title}
+                  </p>
+                </div>
+              ))}
+          </div>
+        )}
       </div>
       <div className="topright">
-        
         <div>
           {/* <img onClick={()=>setShowAvatar((prev)=>!prev)} className="topImg " src={flower} alt="" /> */}
-          <MyDropdown/>
+          <MyDropdown />
           {/* { showAvatar && <div className="">
             <button type="button" onClick={() => navigate('/UserSettings')}>Profile</button>
             <button onClick={logout} style={{color: 'red'}}>Logout</button>
