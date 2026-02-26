@@ -1,8 +1,7 @@
 .post{
-    width: 200px;
-    margin: 40px 25px 40px 25px;
-    /* margin: 25px; */
-    
+    width: 350px;
+    padding: 0px;
+    border: 1px solid purple;    
 }
 
 .post > img{

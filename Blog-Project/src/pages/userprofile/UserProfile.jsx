@@ -5,6 +5,7 @@ import axios from "axios";
 import { useUser } from "../../hooks/useUser";
 import TopBar from "../../components/topbar/TopBar";
 import { useNavigate } from "react-router";
+import { toast } from "sonner";
 // import profilePic from "../assets/profile-pic.png"; // Replace with actual image path
 // import postImage from "../assets/twitter.png"; // The uploaded image reference
 
@@ -92,7 +93,7 @@ const UserProfile = () => {
     try {
       const res = await axios.delete(`${apiUrl}/posts/${post_id}`, { headers });
       console.log(res);
-
+      toast.success('Post deleted successfully')
       getAllPosts();
     } catch (e) {
       console.log(e);
@@ -123,7 +124,7 @@ const UserProfile = () => {
 
   return (
     <>
-      {/* <TopBar/> */}
+      <TopBar/>
       <div>
         <div className="profile-container">
           <div className="header"></div>

@@ -7,6 +7,8 @@ import EditorProvider, {  extensions, MenuBar } from "../../components/ui/Editor
 import TiptapEditor from "../../components/ui/Editor";
 import { useUser } from "../../hooks/useUser";
 import { Toaster, toast } from 'sonner';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 const Write = () => {
   const [content, setContent] = useState(null)
   const [title, setTitle] = useState("")
@@ -72,7 +74,7 @@ const Write = () => {
         toast.success('Post Created Successfully');
       } catch (e) {
         console.log(e);
-        alert('Error Uploading Image');
+        toast('Error Uploading Image');
         return;
       }
       
@@ -97,7 +99,7 @@ const Write = () => {
        onClick={handleImageUpload}
        style={{
         backgroundColor: "white",
-        marginLeft: '208px',
+        marginLeft: '180px',
         width: '70vw',
         height: '250px',
         borderRadius: '10px',
@@ -133,12 +135,20 @@ const Write = () => {
             {}
        </div>
      {/* Editor */}
-     <EditorProvider
+     <ReactQuill theme="snow" value={content} onChange={setContent} style={{
+      backgroundColor: 'white', 
+      width: '70vw', 
+      marginInline: '180px', 
+      marginBottom: '10px'
+      
+      
+      }}/>
+     {/* <EditorProvider
         slotBefore={<MenuBar />}
         extensions={extensions}
         content={content}
         setContent={setContent}
-      />
+      /> */}
       <button className="writeSubmit" onClick={handleSubmit}>Publish</button>
       
       </div>

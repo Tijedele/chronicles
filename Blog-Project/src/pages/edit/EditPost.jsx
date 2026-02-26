@@ -10,6 +10,8 @@ import EditorProvider, {
 import TiptapEditor from "../../components/ui/Editor";
 import { useUser } from "../../hooks/useUser";
 import { Toaster, toast } from "sonner";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 const EditPost = () => {
   const [content, setContent] = useState("");
   const [title, setTitle] = useState("");
@@ -44,7 +46,7 @@ const EditPost = () => {
 
   useEffect(() => {
     setTitle(post?.post_title);
-    console.log(post?.post_content)
+    console.log(post?.post_content);
     setContent(post?.post_content);
     setImageUrl(`${apiUrl}/${post?.image_url}`);
   }, [post]);
@@ -71,8 +73,8 @@ const EditPost = () => {
     e.preventDefault();
     console.log("post submitted", { title, content });
     try {
-      const res = await axios.post(
-        `${apiUrl}/posts/create-post`,
+      const res = await axios.put(
+        `${apiUrl}/posts/${post_id}`,
         {
           title,
           content,
@@ -80,23 +82,25 @@ const EditPost = () => {
         { headers }
       );
       console.log(res);
-      const post_id = res.data.data.post_id;
+      // const post_id = res.data.data.post_id;
       console.log(post_id);
 
       // Upload Image to the server
-      const formData = new FormData();
-      formData.append("image", image);
-      formData.append("post_id", post_id);
-      try {
-        const res = await axios.post(`${apiUrl}/uploads/image`, formData);
-        console.log(res);
-        // alert('Post Created Successfully');
-        toast.success("Post Created Successfully");
-      } catch (e) {
-        console.log(e);
-        alert("Error Uploading Image");
-        return;
+      if (image) {
+        const formData = new FormData();
+        formData.append("image", image);
+        formData.append("post_id", post_id);
+        try {
+          const res = await axios.post(`${apiUrl}/uploads/image`, formData);
+          console.log(res);
+          // alert('Post Created Successfully');
+        } catch (e) {
+          console.log(e);
+          toast("Error Uploading Image");
+          return;
+        }
       }
+      toast.success("Post Edited Successfully");
 
       // e.target.reset();
       // getAllPosts();
@@ -116,7 +120,7 @@ const EditPost = () => {
           onClick={handleImageUpload}
           style={{
             backgroundColor: "white",
-            marginLeft: "208px",
+            marginLeft: "180px",
             width: "70vw",
             height: "250px",
             borderRadius: "10px",
@@ -147,12 +151,23 @@ const EditPost = () => {
           {}
         </div>
         {/* Editor */}
-        <EditorProvider
+        <ReactQuill
+          theme="snow"
+          value={content}
+          onChange={setContent}
+          style={{
+            backgroundColor: "white",
+            width: "70vw",
+            marginInline: "180px",
+            marginBottom: "10px",
+          }}
+        />
+        {/* <EditorProvider
           slotBefore={<MenuBar />}
           extensions={extensions}
           content={content}
           setContent={setContent}
-        />
+        /> */}
         <button className="writeSubmit" onClick={handleSubmit}>
           Publish
         </button>

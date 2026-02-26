@@ -19,7 +19,7 @@ const MyDropdown = () => {
 
   const handleMenuClick = (e) => {
     if (e.key === "2") {
-      navigate("/UserSettings");
+      navigate("/profile");
     }
     if (e.key === "3") {
       navigate("/createpost");
@@ -27,7 +27,10 @@ const MyDropdown = () => {
     if (e.key === "4") {
       navigate("/blogs");
     }
-    if (e.key === "5") {
+    if (e.key === "5") { 
+      navigate("/usersettings");
+    }
+    if (e.key === "6") {
       logout(); 
       navigate("/");
     }
@@ -56,6 +59,10 @@ const MyDropdown = () => {
     },
     {
       key: '5',
+      label: 'Settings',
+    },
+    {
+      key: '6',
       label: 'Logout',
     },
   ];

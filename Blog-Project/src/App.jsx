@@ -23,8 +23,8 @@ export default function App() {
       <Route path="/" element={<Signin />} />
       <Route path="/single/:post_id" element={<Single />} />
       <Route path="/createpost" element={<Write/>} />
-      {/* <Route path="/editpost/:post_id" element={<EditPost/>} /> */}
-      <Route path="/editpost/:post_id" element={<Edit/>} />
+      <Route path="/editpost/:post_id" element={<EditPost/>} />
+      {/* <Route path="/editpost/:post_id" element={<Edit/>} /> */}
       <Route path="/blogs" element={<Blogs/>} />
       <Route path="/usersettings" element={<UserSettings/>} />
       <Route path="/profile" element={<UserProfile/>} />

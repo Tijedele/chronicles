@@ -3,6 +3,7 @@ import TopBar from "../../components/topbar/TopBar";
 import "./NewHome.css";
 import Posts from "../posts/Posts";
 import Header from "../../components/header/Header";
+import SideBar from "../../components/sidebar/SideBar";
 
 const NewHome = () => {
   return (
@@ -15,7 +16,9 @@ const NewHome = () => {
         A factual written account of important or historical events in the order of their occurrence.
         </p>
       </div>
+      <div className="home">
       <Posts/>
+      {/* <SideBar/> */}
       {/* <div className="second-box">
         <div className="blog-cards">
 
@@ -25,6 +28,7 @@ const NewHome = () => {
         <div className="blog-cards"></div>
         <div className="blog-cards"></div>
     </div> */}
+      </div>
     </>
   );
 };

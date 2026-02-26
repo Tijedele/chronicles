@@ -109,15 +109,29 @@ const Post = () => {
       console.log(e);
     }
   };
-  console.log(posts.length)
+  console.log(posts.length);
   return (
-    <div  className="" style={{display:'flex', flexWrap:'wrap', gap:'24px', marginInline: '100px', border: ''}}>
+    <div
+      className=""
+      style={{
+        display: "flex",
+        flexWrap: "wrap",
+        // justifyContent: "center",
+        alignContent: "center",
+        gap: "24px",
+        marginInline: "",
+        border: "1px solid red",
+        paddingInline: "24px",
+        width: "100%",
+      }}
+    >
       {posts?.map((post, index) => (
-        <div onClick={() => navigate(`/single/${post?.post_id}`)} key={index} className="post">
-          <img
-            src={`${apiUrl}/${post?.image_url}`}
-            alt=""
-          />
+        <div
+          onClick={() => navigate(`/single/${post?.post_id}`)}
+          key={index}
+          className="post"
+        >
+          <img src={`${apiUrl}/${post?.image_url}`} alt="" />
           <div className="postInfo">
             <div className="postCats">
               <span className="postCat">Food & Lifstyle</span>
@@ -127,7 +141,12 @@ const Post = () => {
             <hr />
             <span className="postDate">{post?.created_at}</span>
           </div>
-          <p className="postDesc">{post?.post_content.slice(0, 15)}...</p>
+          <p
+            className="postDesc"
+            dangerouslySetInnerHTML={{
+              __html: post?.post_content.slice(0, 300),
+            }}
+          />
         </div>
       ))}
     </div>

@@ -4,10 +4,12 @@ import "./index.css";
 import App from "./App.jsx";
 import { BrowserRouter } from "react-router";
 import UserProvider from "./content/userContext.jsx";
+import { Toaster } from "sonner";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
+    <Toaster/>
       <UserProvider>
         <App />
       </UserProvider>
