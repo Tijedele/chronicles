@@ -5,7 +5,7 @@ import Home from "./pages/home/Home";
 import NewHome from "./pages/home/NewHome";
 import Signup from "./pages/signup/Signup";
 import Signin from "./pages/signin/Signin";
-import Single from "./pages/SingleTemp/Single";
+import Single from "./pages/single/Single";
 import Write from "./pages/write/Write";
 import UserSettings from "./pages/UserSettings/UserSettings";
 import SinglePost from "./pages/SinglePost/SinglePost";
