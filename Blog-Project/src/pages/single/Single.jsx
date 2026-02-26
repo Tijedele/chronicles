@@ -8,16 +8,16 @@ import { useParams } from "react-router";
 import Interactions from "../../components/Interactions/Interactions.jsx";
 
 const Single = () => {
-    const { post_id } = useParams();
-  
+  const { post_id } = useParams();
+
   return (
     <>
       <TopBar />
       <div className="single">
         <div>
-        <SinglePost post_id={post_id} />
-        
-        <Comments/>
+          <SinglePost post_id={post_id} />
+
+          <Comments />
         </div>
         <SideBar />
       </div>
