@@ -1,0 +1,8 @@
+# Ignore dependencies
+node_modules/
+
+# Ignore environment variables
+.env
+
+# Optional but good practice
+.DS_Store
